@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نظف أينما تذهب | Clean Up Wherever You Go</title>
+<!-- مكتبة Tailwind: تعمل مع الإنترنت مباشرة -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- للعمل بدون إنترنت: احذف السطر اللي فوق وفعّل هذا السطر بعد حفظ tailwind.js بنفس المجلد
+<script src="tailwind.js"></script>
+-->
+<style>
+  /* ألوان الهوية: غيّر لون هون بيتغير بكل الصفحة */
+  :root {
+    --teal: #2a6f77;     /* أزرق مائي عميق */
+    --emerald: #177a4f;  /* أخضر زمردي */
+    --lime: #9ccb6a;     /* أخضر فاتح */
+    --gold: #e8b93a;     /* أصفر ذهبي */
+    --mint: #dff1ee;     /* خلفية فاتحة */
+    --ink: #1d2b28;
+  }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { font-family: 'Beirut Sans', 'Golos Text', 'Segoe UI', Tahoma, sans-serif; color: var(--ink); background: var(--mint); }
+  /* تنقل سلس بين الأقسام */
+  html { scroll-behavior: smooth; }
+  section[id], footer[id] { scroll-margin-top: 1rem; }
+  /* ظهور هادئ للبطاقات عند النزول + رفعة عند المرور */
+  .reveal { opacity: 0; translate: 0 18px; transition: opacity .6s ease, translate .6s ease, transform .3s ease, box-shadow .3s ease; }
+  .reveal.show { opacity: 1; translate: 0 0; }
+  .reveal:hover { transform: translateY(-8px); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; translate: none; transition: none; }
+    .reveal:hover { transform: none; }
+  }
+  /* دخول العنوان مرة وحدة عند فتح الصفحة */
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .hero-in > * { animation: rise .7s ease both; }
+  .hero-in > *:nth-child(2) { animation-delay: .15s; }
+  .hero-in > *:nth-child(3) { animation-delay: .3s; }
+  @media (prefers-reduced-motion: reduce) { .hero-in > * { animation: none; } }
+  /* رابط القائمة الحالي يتلوّن مع النزول */
+  .nv { border-bottom: 2px solid transparent; transition: border-color .25s, color .2s, transform .2s; }
+  .nv.on { border-color: var(--teal); }
+  .ic { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body id="top">
+
+<!-- مكتبة الأيقونات: استعملها هيك <svg class="ic"><use href="#leaf"/></svg> وحدد الحجم بـ text-4xl -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14M5 19c3-5 6-8 10-10"/></symbol>
+  <symbol id="turbine" viewBox="0 0 24 24"><path d="M11.2 12.3L10 22h4l-1.2-9.7"/><circle cx="12" cy="11" r="1.4"/><path d="M12 11c-2.2-3-2.6-6.4 0-9.6 2.6 3.2 2.2 6.6 0 9.6z"/><path d="M12 11c-2.2-3-2.6-6.4 0-9.6 2.6 3.2 2.2 6.6 0 9.6z" transform="rotate(120 12 11)"/><path d="M12 11c-2.2-3-2.6-6.4 0-9.6 2.6 3.2 2.2 6.6 0 9.6z" transform="rotate(240 12 11)"/></symbol>
+  <symbol id="solar" viewBox="0 0 24 24"><path d="M4 21l2-8h12l2 8zM8 13l-1 8M12 13v8M16 13l1 8M5 17h14M12 3v2M5 6l1.5 1.5M19 6l-1.5 1.5"/></symbol>
+  <symbol id="drop" viewBox="0 0 24 24"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></symbol>
+  <symbol id="wind" viewBox="0 0 24 24"><path d="M3 9h11a3 3 0 1 0-3-3M3 14h15a3 3 0 1 1-3 3M3 19h7"/></symbol>
+  <symbol id="recycle" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 4v4h-4M20 12a8 8 0 0 1-14 5M4 20v-4h4"/></symbol>
+  <symbol id="nobottle" viewBox="0 0 24 24"><path d="M10 2h4v3l2 3v12H8V8l2-3zM3 3l18 18"/></symbol>
+  <symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></symbol>
+  <symbol id="insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></symbol>
+  <symbol id="in" viewBox="0 0 24 24"><path d="M4 9h4v11H4zM6 4.5v.01M11 9h4v2c1-2 3-2.5 4-2 2 .5 2 3 2 5v6h-4v-5c0-2-3-2-3 0v5h-3z"/></symbol>
+  <symbol id="mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+</svg>
+
+<div class="max-w-6xl mx-auto sm:p-6">
+<div class="bg-white sm:rounded-xl overflow-hidden shadow-lg">
+
+  <!-- الهيدر -->
+  <header class="px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+    <a href="#top" class="flex items-center gap-1">
+      <img src="logo.jpg" alt="نظف أينما تذهب" class="w-14 h-14 object-contain">
+      <span class="leading-tight"><b class="block text-sm" dir="ltr">Clean Up Wherever You Go</b><span class="text-sm">نظف أينما تذهب</span></span>
+    </a>
+    <nav class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+      <a href="#top" class="nv on">الرئيسية</a>
+      <a href="about.html" class="nv hover:text-[color:var(--emerald)] hover:-translate-y-0.5">من نحن</a>
+      <a href="#pillars" class="nv hover:text-[color:var(--emerald)] hover:-translate-y-0.5">ركائزنا</a>
+      <a href="#articles" class="nv hover:text-[color:var(--emerald)] hover:-translate-y-0.5">المقالات</a>
+      <a href="#contact" class="nv hover:text-[color:var(--emerald)] hover:-translate-y-0.5">تواصل</a>
+      <a href="#join" class="bg-[var(--teal)] text-white rounded-full px-4 py-1.5 hover:bg-[var(--emerald)] hover:scale-105 transition">شاركنا في بناء غدٍ أفضل</a>
+    </nav>
+  </header>
+
+  <!-- الهيرو: فك التعليق عن سطر الصورة وضع اسم صورتك -->
+  <section class="relative overflow-hidden bg-[var(--teal)]">
+    <img src="https://images.pexels.com/photos/5029853/pexels-photo-5029853.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="أيدٍ تزرع معًا" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black/35"></div><!-- طبقة داكنة لتوضيح النص، غيّر 50 لزيادة أو تقليل العتمة -->
+    <div class="relative max-w-3xl mx-auto px-4 py-20 md:py-32 text-center text-white hero-in">
+      <h1 class="text-3xl md:text-5xl font-bold drop-shadow-lg">شاركنا في بناء كل مكان أفضل</h1>
+      <p class="mt-2 text-xl md:text-3xl font-bold drop-shadow-lg" dir="ltr">Together, we leave every place better</p>
+      <a href="#join" class="inline-block mt-8 bg-[var(--gold)] text-[color:var(--ink)] font-bold rounded-full px-6 py-2 hover:bg-white hover:scale-105 transition">شاركنا</a>
+    </div>
+  </section>
+
+  <!-- المقالات -->
+  <section id="articles" class="bg-[var(--emerald)] text-white px-4 py-14">
+    <h2 class="text-2xl md:text-3xl font-bold text-center">مقالات وتوعية <span class="opacity-70 mx-1">|</span> <span dir="ltr">Articles &amp; Awareness</span></h2>
+    <div class="max-w-5xl mx-auto mt-10 grid gap-6 md:grid-cols-3 text-[color:var(--ink)]">
+
+      <article class="group reveal bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden text-center">
+        <div class="h-14 bg-[var(--mint)]"></div>
+        <div class="-mt-9 mx-auto transition duration-300 group-hover:scale-110 w-[72px] h-[72px] rounded-full bg-white border-4 border-white shadow text-[color:var(--teal)] text-4xl grid place-items-center"><svg class="ic"><use href="#nobottle"/></svg></div>
+        <div class="p-5">
+          <h3 class="font-bold text-lg">١٠ خطوات لتقليل البلاستيك</h3>
+          <p class="mt-2 text-sm text-gray-600">عادات يومية بسيطة تقلل استهلاكك للبلاستيك في البيت والعمل.</p>
+          <a href="#" class="inline-block mt-4 bg-[var(--gold)] text-sm font-bold rounded-full px-5 py-2 transition hover:bg-[var(--teal)] hover:text-white">اقرأ المزيد</a>
+        </div>
+      </article>
+
+      <article class="group reveal bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden text-center">
+        <div class="h-14 bg-[var(--mint)]"></div>
+        <div class="-mt-9 mx-auto transition duration-300 group-hover:scale-110 w-[72px] h-[72px] rounded-full bg-[var(--lime)] border-4 border-white shadow text-[color:var(--emerald)] text-4xl grid place-items-center"><svg class="ic"><use href="#bolt"/></svg></div>
+        <div class="p-5">
+          <h3 class="font-bold text-lg">طاقة نظيفة لمجتمعنا</h3>
+          <p class="mt-2 text-sm text-gray-600">كيف تساهم الطاقة الشمسية وطاقة الرياح في بيئة أنظف.</p>
+          <a href="#" class="inline-block mt-4 bg-[var(--gold)] text-sm font-bold rounded-full px-5 py-2 transition hover:bg-[var(--teal)] hover:text-white">اقرأ المزيد</a>
+        </div>
+      </article>
+
+      <article class="group reveal bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden text-center">
+        <div class="h-14 bg-[var(--mint)]"></div>
+        <div class="-mt-9 mx-auto transition duration-300 group-hover:scale-110 w-[72px] h-[72px] rounded-full bg-[#eef3a8] border-4 border-white shadow text-[color:var(--emerald)] text-4xl grid place-items-center"><svg class="ic"><use href="#recycle"/></svg></div>
+        <div class="p-5">
+          <h3 class="font-bold text-lg">أعد التدوير بالطريقة الصحيحة</h3>
+          <p class="mt-2 text-sm text-gray-600">تعرّف على المواد القابلة للتدوير وكيف تفرزها في بيتك.</p>
+          <a href="#" class="inline-block mt-4 bg-[var(--gold)] text-sm font-bold rounded-full px-5 py-2 transition hover:bg-[var(--teal)] hover:text-white">اقرأ المزيد</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- أول حملة -->
+  <section id="about" class="relative overflow-hidden text-white">
+    <img src="https://images.pexels.com/photos/5030010/pexels-photo-5030010.jpeg?auto=compress&cs=tinysrgb&w=1600"
+         alt="أيدٍ تزرع معًا" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-[var(--teal)] via-[rgba(42,111,119,0.8)] to-black/30"></div>
+    <div class="relative max-w-3xl mx-auto px-4 pt-44 pb-14 md:pt-64 text-center">
+      <span class="inline-block bg-[var(--gold)] text-[color:var(--ink)] font-bold text-sm rounded-full px-4 py-1">أوّل حملة <span class="opacity-60 mx-1">|</span> <span dir="ltr">First Campaign</span></span>
+      <h2 class="mt-4 text-3xl md:text-5xl font-bold drop-shadow-lg">حملتنا الأولى تبدأ قريبًا</h2>
+      <p class="mt-3 text-lg text-white/90">انضم إلينا، وشارك في جعل مكاننا أنظف وأجمل.</p>
+      <div class="mt-8 grid gap-3 sm:grid-cols-3 text-sm">
+        <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3"><b class="block text-[color:var(--gold)]">الموعد</b>قريبًا</div>
+        <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3"><b class="block text-[color:var(--gold)]">المكان</b>طرطوس</div>
+        <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3"><b class="block text-[color:var(--gold)]">المشاركة</b>مفتوحة للجميع</div>
+      </div>
+      <a href="#join" class="inline-block mt-8 bg-[var(--gold)] text-[color:var(--ink)] font-bold rounded-full px-8 py-3 hover:bg-white hover:scale-105 transition">سجّل مشاركتك</a>
+    </div>
+  </section>
+
+  <!-- ركائزنا -->
+  <section id="pillars" class="bg-[var(--mint)] px-4 py-14">
+    <h2 class="text-2xl md:text-3xl font-bold text-center">ركائزنا <span class="opacity-60 mx-1">|</span> <span dir="ltr">Our Pillars</span></h2>
+    <div class="max-w-4xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:items-stretch text-center">
+      <div class="group reveal rounded-xl bg-white/70 p-5 md:py-8">
+        <span class="text-5xl text-[color:var(--teal)] inline-block transition duration-300 group-hover:scale-125 group-hover:-rotate-6"><svg class="ic"><use href="#drop"/></svg></span>
+        <h3 class="mt-2 font-bold">مياه نقية</h3><p class="mt-1 text-sm text-gray-700">حماية الأنهار والشواطئ من التلوث.</p>
+      </div>
+      <div class="group reveal rounded-xl bg-[#e9efa5] p-5 md:py-8">
+        <span class="text-5xl text-[color:var(--emerald)] inline-block transition duration-300 group-hover:scale-125 group-hover:-rotate-6"><svg class="ic"><use href="#solar"/></svg></span>
+        <h3 class="mt-2 font-bold">طاقة شمسية</h3><p class="mt-1 text-sm text-gray-700">التوعية بمصادر الطاقة المتجددة.</p>
+      </div>
+      <div class="group reveal rounded-xl bg-[var(--lime)] p-5 md:py-8">
+        <span class="text-5xl text-[color:var(--emerald)] inline-block transition duration-300 group-hover:scale-125 group-hover:-rotate-6"><svg class="ic"><use href="#turbine"/></svg></span>
+        <h3 class="mt-2 font-bold">طاقة الرياح</h3><p class="mt-1 text-sm text-gray-700">دعم حلول نظيفة لمستقبل مستدام.</p>
+      </div>
+      <div class="group reveal rounded-xl bg-white/70 p-5 md:py-8">
+        <span class="text-5xl text-[color:var(--emerald)] inline-block transition duration-300 group-hover:scale-125 group-hover:-rotate-6"><svg class="ic"><use href="#leaf"/></svg></span>
+        <h3 class="mt-2 font-bold">تشجير وطبيعة</h3><p class="mt-1 text-sm text-gray-700">زراعة الأشجار والعناية بالمساحات الخضراء.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- انضم -->
+  <section id="join" class="bg-[var(--teal)] text-white px-4 py-14">
+    <div class="max-w-5xl mx-auto grid gap-10 md:grid-cols-2 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold">شاركنا في بناء غد أفضل</h2>
+        <p class="mt-3 text-white/90">سجّل بياناتك وسنتواصل معك لتكون جزءًا من حملاتنا القادمة.</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-white/15 grid place-items-center text-xl"><svg class="ic"><use href="#leaf"/></svg></span>أنشطة ميدانية في طرطوس</li>
+          <li class="flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-white/15 grid place-items-center text-xl"><svg class="ic"><use href="#bolt"/></svg></span>ورش وحملات توعوية</li>
+          <li class="flex items-center gap-3"><span class="w-10 h-10 rounded-full bg-white/15 grid place-items-center text-xl"><svg class="ic"><use href="#drop"/></svg></span>فريق شبابي يجمعه هدف واحد</li>
+        </ul>
+      </div>
+      <form class="bg-white text-[color:var(--ink)] rounded-2xl p-6 shadow-xl grid gap-4 text-sm">
+        <label class="block font-bold">الاسم
+          <input type="text" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-[var(--emerald)]">
+        </label>
+        <label class="block font-bold">البريد الإلكتروني
+          <input type="email" dir="ltr" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-[var(--emerald)]">
+        </label>
+        <label class="block font-bold">لماذا تريد التطوع؟
+          <textarea rows="3" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 font-normal focus:outline-none focus:ring-2 focus:ring-[var(--emerald)]"></textarea>
+        </label>
+        <button type="button" class="bg-[var(--gold)] font-bold rounded-full py-3 hover:bg-[var(--emerald)] hover:text-white transition">إرسال</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer id="contact" class="px-4 py-8 text-sm">
+    <div class="flex flex-wrap items-start justify-between gap-6">
+      <span class="w-16 h-16 rounded-full bg-[var(--emerald)] text-white grid place-items-center text-3xl"><svg class="ic"><use href="#drop"/></svg></span>
+      <div>
+        <b>تابعنا</b>
+        <div class="mt-2 flex gap-3 text-2xl text-[color:var(--teal)]">
+          <a href="#" aria-label="Instagram" class="inline-block transition hover:text-[color:var(--emerald)] hover:-translate-y-1"><svg class="ic"><use href="#insta"/></svg></a>
+          <a href="#" aria-label="Facebook" class="inline-block transition hover:text-[color:var(--emerald)] hover:-translate-y-1"><svg class="ic"><use href="#fb"/></svg></a>
+          <a href="#" aria-label="LinkedIn" class="inline-block transition hover:text-[color:var(--emerald)] hover:-translate-y-1"><svg class="ic"><use href="#in"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <b>تواصل معنا</b>
+        <p class="mt-2 flex items-center gap-2"><svg class="ic"><use href="#phone"/></svg><span dir="ltr">+000 000 000</span></p>
+        <p class="mt-1 flex items-center gap-2"><svg class="ic"><use href="#mail"/></svg><span dir="ltr">info@example.com</span></p>
+      </div>
+    </div>
+    <div class="mt-6 pt-4 border-t border-gray-200 flex flex-wrap justify-between gap-2 text-gray-500">
+      <span dir="ltr">Clean Up Wherever You Go</span>
+      <span>© 2026 جميع الحقوق محفوظة</span>
+    </div>
+  </footer>
+
+</div>
+</div>
+<script>
+  // ظهور البطاقات بالتتابع عند النزول لها
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var t = e.target; t.classList.add('show'); io.unobserve(t); setTimeout(function () { t.style.transitionDelay = '0ms'; }, 1000); }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 90 + 'ms'; io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('show'); });
+  }
+
+  // تمييز رابط القسم الحالي بالقائمة
+  var links = [].slice.call(document.querySelectorAll('nav a.nv'));
+  var ticking = false;
+  function mark() {
+    var cur = links[0], best = -Infinity;
+    links.forEach(function (a) {
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if (!t) return;
+      var top = t.getBoundingClientRect().top;
+      if (top <= window.innerHeight * 0.35 && top > best) { best = top; cur = a; }
+    });
+    links.forEach(function (a) { a.classList.toggle('on', a === cur); });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
+  mark();
+</script>
+</body>
+</html>

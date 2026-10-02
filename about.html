@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>من نحن | Clean Up Wherever You Go</title>
+<!-- مكتبة Tailwind: تعمل مع الإنترنت مباشرة -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { --teal:#2a6f77; --emerald:#177a4f; --lime:#9ccb6a; --gold:#e8b93a; --mint:#dff1ee; --ink:#1d2b28; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Beirut Sans','Golos Text','Segoe UI',Tahoma,sans-serif; color: var(--ink); background: var(--mint); }
+  .ic { width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .nl { position:relative; padding-bottom:2px; transition:color .2s; }
+  .nl::after { content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:0; background:var(--teal); transition:width .25s; }
+  .nl:hover { color:var(--emerald); }
+  .nl:hover::after, .nl.on::after { width:100%; }
+  .card { transition:transform .3s, box-shadow .3s; }
+  .card:hover { transform:translateY(-6px); box-shadow:0 16px 28px rgba(0,0,0,.15); }
+  a[class*="rounded-full"] { transition:transform .2s, background-color .2s; }
+  a[class*="rounded-full"]:hover { transform:translateY(-2px); }
+  @keyframes rise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+  .hero-in > * { animation: rise .7s ease both; }
+  .hero-in > *:nth-child(2) { animation-delay:.15s; }
+  @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14M5 19c3-5 6-8 10-10"/></symbol>
+  <symbol id="drop" viewBox="0 0 24 24"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></symbol>
+  <symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></symbol>
+  <symbol id="recycle" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 4v4h-4M20 12a8 8 0 0 1-14 5M4 20v-4h4"/></symbol>
+</svg>
+
+<div class="max-w-6xl mx-auto sm:p-6">
+<div class="bg-white sm:rounded-xl overflow-hidden shadow-lg">
+
+  <!-- الهيدر -->
+  <header class="px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center gap-1">
+      <img src="logo.jpg" alt="نظف أينما تذهب" class="w-14 h-14 object-contain">
+      <span class="leading-tight"><b class="block text-sm" dir="ltr">Clean Up Wherever You Go</b><span class="text-sm">نظف أينما تذهب</span></span>
+    </a>
+    <nav class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+      <a href="home .html" class="nl">الرئيسية</a>
+      <a href="about.html" class="nl on">من نحن</a>
+      <a href="home .html#pillars" class="nl">ركائزنا</a>
+      <a href="home .html#articles" class="nl">المقالات</a>
+      <a href="home .html#contact" class="nl">تواصل</a>
+      <a href="home .html#join" class="bg-[var(--teal)] text-white rounded-full px-4 py-1.5 hover:bg-[var(--emerald)]">شاركنا في بناء غدٍ أفضل</a>
+    </nav>
+  </header>
+
+  <!-- العنوان -->
+  <section class="bg-gradient-to-l from-[var(--teal)] to-[var(--emerald)] text-white">
+    <div class="max-w-3xl mx-auto px-4 py-14 md:py-20 text-center hero-in">
+      <h1 class="text-3xl md:text-5xl font-bold">من نحن؟</h1>
+      <p class="mt-2 text-xl md:text-2xl font-bold" dir="ltr">Clean Up Wherever You Go</p>
+    </div>
+  </section>
+
+  <!-- التعريف -->
+  <section class="max-w-5xl mx-auto px-4 py-12 grid gap-8 md:grid-cols-2 items-center">
+    <div class="flex justify-center md:order-last">
+      <img src="logo.jpg" alt="نظف أينما تذهب" class="w-64 h-64 md:w-80 md:h-80 object-contain">
+    </div>
+    <div class="leading-8 text-gray-800">
+    <p>مرحبًا بك في <b>Clean Up Wherever You Go</b> (نظف أينما تذهب) – الحملة التوعوية والمبادرة البيئية المنطلقة من جمهورية سوريا العربية إلى كل العالم، وتحديدًا من مدينة طرطوس، لنرسم فكرًا جديدًا حول علاقة الإنسان بالمكان.</p>
+    <p class="mt-4">نحن مبادرة شبابية توعوية انطلقت من إيماننا العميق بأن:</p>
+    <blockquote class="my-5 border-s-4 border-[var(--gold)] bg-[var(--mint)] rounded-e-lg px-5 py-4 text-lg font-bold text-[color:var(--teal)]">«نظافة المكان هي انعكاس مباشر لنظافة وأصالة أفكار الأشخاص المتواجدين فيه»</blockquote>
+    <p>فالبيئة النظيفة لا تبدأ بجمع النفايات، بل تبدأ أولًا بنقاء الفكرة والوعي داخل عقولنا.</p>
+    </div>
+  </section>
+
+  <!-- الرؤية والرسالة -->
+  <section class="bg-[var(--mint)] px-4 py-12">
+    <div class="max-w-5xl mx-auto grid gap-6 md:grid-cols-2">
+      <div class="card bg-white rounded-2xl shadow-md p-6">
+        <span class="w-12 h-12 rounded-full bg-[var(--lime)] text-[color:var(--emerald)] grid place-items-center text-2xl"><svg class="ic"><use href="#leaf"/></svg></span>
+        <h2 class="mt-3 text-xl font-bold">رؤيتنا <span class="text-sm opacity-60" dir="ltr">Our Vision</span></h2>
+        <p class="mt-3 leading-8 text-gray-700">نطمح في Clean Up Wherever You Go إلى قيادة تحول ثقافي وسلوكي في المجتمع السوري والعربي والعالمي، ليكون الحفاظ على نظافة الأماكن العامة والشواطئ والمساحات الطبيعية سلوكًا حضاريًا تلقائيًا ينبع من المسؤولية الذاتية، حتى تصبح طرطوس وسوريا نموذجًا يُحتذى به في الاستدامة البيئية عالميًا.</p>
+      </div>
+      <div class="card bg-white rounded-2xl shadow-md p-6">
+        <span class="w-12 h-12 rounded-full bg-[#eef3a8] text-[color:var(--teal)] grid place-items-center text-2xl"><svg class="ic"><use href="#drop"/></svg></span>
+        <h2 class="mt-3 text-xl font-bold">رسالتنا <span class="text-sm opacity-60" dir="ltr">Our Mission</span></h2>
+        <p class="mt-3 leading-8 text-gray-700">نشر وتعزيز ثقافة الوعي البيئي الفردي والجماعي عبر ربط نظافة المحيط الخارجي بالارتقاء الفكري. نسعى إلى تحويل الأفكار الإيجابية إلى ممارسات حقيقية على الأرض، وتزويد أفراد المجتمع بالوعي والأدوات اللازمة لترك كل مكان يمرون به أنظف مما كان عليه.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الأهداف -->
+  <section class="px-4 py-12">
+    <h2 class="text-2xl font-bold text-center">أهدافنا الاستراتيجية <span class="opacity-60 mx-1">|</span> <span dir="ltr">Our Goals</span></h2>
+    <p class="mt-3 max-w-2xl mx-auto text-center text-gray-700">بناءً على المعايير الدولية للمبادرات المجتمعية، ترتكز حملتنا على تحقيق الأهداف التالية:</p>
+    <div class="max-w-5xl mx-auto mt-8 grid gap-5 sm:grid-cols-2">
+      <div class="card flex gap-4 rounded-xl border border-gray-200 p-5">
+        <b class="shrink-0 w-10 h-10 rounded-full bg-[var(--teal)] text-white grid place-items-center">1</b>
+        <div><h3 class="font-bold">تغيير المفاهيم السلوكية</h3><p class="mt-1 text-sm leading-7 text-gray-700">ترسيخ مبدأ أن نظافة الشارع أو الحديقة أو الشاطئ هي مرآة لثقافة ووعي الفرد.</p></div>
+      </div>
+      <div class="card flex gap-4 rounded-xl border border-gray-200 p-5">
+        <b class="shrink-0 w-10 h-10 rounded-full bg-[var(--teal)] text-white grid place-items-center">2</b>
+        <div><h3 class="font-bold">التوعية الميدانية والرقمية</h3><p class="mt-1 text-sm leading-7 text-gray-700">إطلاق حملات توعوية تفاعلية عبر الإنترنت، إلى جانب الأنشطة الميدانية المباشرة في طرطوس.</p></div>
+      </div>
+      <div class="card flex gap-4 rounded-xl border border-gray-200 p-5">
+        <b class="shrink-0 w-10 h-10 rounded-full bg-[var(--teal)] text-white grid place-items-center">3</b>
+        <div><h3 class="font-bold">تحفيز المشاركة المجتمعية</h3><p class="mt-1 text-sm leading-7 text-gray-700">دمج فئات المجتمع المختلفة، وخاصة الشباب والأطفال، في أنشطة بيئية تكرّس لديهم حب الأرض وحمايتها.</p></div>
+      </div>
+      <div class="card flex gap-4 rounded-xl border border-gray-200 p-5">
+        <b class="shrink-0 w-10 h-10 rounded-full bg-[var(--teal)] text-white grid place-items-center">4</b>
+        <div><h3 class="font-bold">خلق بدائل مستدامة</h3><p class="mt-1 text-sm leading-7 text-gray-700">تقديم نصائح وحلول عملية لتقليل المخلفات والحد من استخدام البلاستيك في حياتنا اليومية.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- القيم -->
+  <section class="bg-[var(--emerald)] text-white px-4 py-12">
+    <h2 class="text-2xl font-bold text-center">قيمنا الأساسية <span class="opacity-70 mx-1">|</span> <span dir="ltr">Our Core Values</span></h2>
+    <p class="mt-3 max-w-2xl mx-auto text-center text-white/90">تستند حملتنا في كل نشاطاتها إلى قيم دولية راسخة:</p>
+    <div class="max-w-5xl mx-auto mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 text-[color:var(--ink)]">
+      <div class="card bg-white rounded-xl p-5 text-center">
+        <span class="mx-auto w-12 h-12 rounded-full bg-[var(--mint)] text-[color:var(--teal)] grid place-items-center text-2xl"><svg class="ic"><use href="#leaf"/></svg></span>
+        <h3 class="mt-3 font-bold">الوعي الفكري</h3><p class="mt-1 text-sm leading-7 text-gray-700">نؤمن أن التغيير الحقيقي والمستدام يبدأ دائمًا من تغيير العقول.</p>
+      </div>
+      <div class="card bg-white rounded-xl p-5 text-center">
+        <span class="mx-auto w-12 h-12 rounded-full bg-[var(--mint)] text-[color:var(--teal)] grid place-items-center text-2xl"><svg class="ic"><use href="#recycle"/></svg></span>
+        <h3 class="mt-3 font-bold">المسؤولية المشتركة</h3><p class="mt-1 text-sm leading-7 text-gray-700">حماية بيئتنا في طرطوس وسوريا والعالم هي واجب يقع على عاتق كل فرد منا.</p>
+      </div>
+      <div class="card bg-white rounded-xl p-5 text-center">
+        <span class="mx-auto w-12 h-12 rounded-full bg-[var(--mint)] text-[color:var(--teal)] grid place-items-center text-2xl"><svg class="ic"><use href="#bolt"/></svg></span>
+        <h3 class="mt-3 font-bold">المبادرة والإيجابية</h3><p class="mt-1 text-sm leading-7 text-gray-700">لا ننتظر التغيير، بل نصنعه بأيدينا وأفكارنا أينما ذهبنا.</p>
+      </div>
+      <div class="card bg-white rounded-xl p-5 text-center">
+        <span class="mx-auto w-12 h-12 rounded-full bg-[var(--mint)] text-[color:var(--teal)] grid place-items-center text-2xl"><svg class="ic"><use href="#drop"/></svg></span>
+        <h3 class="mt-3 font-bold">العمل التطوعي النقي</h3><p class="mt-1 text-sm leading-7 text-gray-700">نجتمع بشغف وهدف واحد لترك أثر أخضر دائم للأجيال القادمة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- الخاتمة -->
+  <section class="bg-[var(--gold)] px-4 py-12 text-center">
+    <p class="max-w-2xl mx-auto text-xl md:text-2xl font-bold leading-9">بيئتنا هي مرآة أفكارنا.. انضم إلينا، ولنجعل كل مكان نمر به ينبض بالنقاء والجمال!</p>
+    <a href="index.html#join" class="inline-block mt-6 bg-[var(--teal)] text-white font-bold rounded-full px-7 py-2.5 hover:bg-[var(--emerald)]">انضم إلينا</a>
+  </section>
+
+  <footer class="px-4 py-6 text-sm text-gray-500 flex flex-wrap justify-between gap-2">
+    <span dir="ltr">Clean Up Wherever You Go</span>
+    <span>© 2026 جميع الحقوق محفوظة</span>
+  </footer>
+
+</div>
+</div>
+</body>
+</html>
